@@ -1089,16 +1089,16 @@
             C as IST Checker participant I as IST Component participant F as
             Fetch/API participant B as Backend participant R as RTS Server Note
             over U,R: Session starts - Timer initialized U->>W: User activity
-            click keydown mousemove W->>E: Event triggered E->>E: Update
+            (click, keydown, mousemove) W->>E: Event triggered E->>E: Update
             lastActiveTime loop Every 60 seconds T->>C: Timer tick
-            MAIN_TIMER_RUNNING C->>E: getLastActiveTime E-->>C: lastActiveTime
+            (MAIN_TIMER_RUNNING) C->>E: getLastActiveTime E-->>C: lastActiveTime
             C->>C: isUserActiveInXSeconds alt User was active in last 60s AND
             right time window C->>I: notifier.extendUserSession I->>F: getData
             activities.sessionExtend F->>B: POST /session/extend B-->>F: Success
             Response F-->>I: onSessionExtendSuccess I->>R: Publish RESTART event
-            R-->>I: Broadcast to all tabs I->>T: restart timer 900s Note over I:
-            Timer reset to full duration else User was NOT active Note over C:
-            Continue countdown end end
+            R-->>I: Broadcast to all tabs I->>T: restart timer (900s) Note over
+            I: Timer reset to full duration else User was NOT active Note over
+            C: Continue countdown end end
           </div>
         </div>
       </section>
@@ -1127,7 +1127,7 @@
             participant F as Fetch/API participant B as Backend participant R as
             RTS Server participant O as Other Tabs Note over U,O: Timer reaches
             80 seconds remaining I->>M: Show expiry modal I->>E: updateListeners
-            - CLICK only M->>U: Display Session expiring warning U->>M: Clicks
+            - CLICK only M->>U: Display "Session expiring" warning U->>M: Clicks
             anywhere on page M->>I: onWindowClick I->>E: resetListeners -
             restore all events I->>M: Show progress indicator I->>F:
             extendUserSession F->>B: POST /session/extend alt Success B-->>F:
@@ -1135,7 +1135,7 @@
             R->>O: WebSocket broadcast RESTART O->>O: Reset timers and close
             modals I->>M: closeModal I->>I: showSessionExtensionToast Note over
             I: Session extended successfully else Error B-->>F: Error response
-            F-->>I: onSessionExtendError Note over I: Log error no retry end
+            F-->>I: onSessionExtendError Note over I: Log error (no retry) end
           </div>
         </div>
       </section>
@@ -1159,17 +1159,18 @@
             External Event Trigger Flow (Product Integration)
           </div>
           <div class="mermaid">
-            sequenceDiagram participant P as Product e.g. Freshcaller
+            sequenceDiagram participant P as Product (e.g. Freshcaller)
             participant D as DOM participant O as Omnibar Event Target
             participant I as IST Component participant F as Fetch/API
             participant B as Backend Note over P,B: Product detects activity
-            Omnibar cannot track P->>P: Create CustomEvent extendIdleSession
-            P->>D: querySelector data-omnibar-event-target D-->>P: Omnibar event
-            target element P->>O: dispatchEvent extendIdleSessionEvent O->>I:
-            hookIntoEvent EXTEND_IDLE_SESSION I->>F: extendSession F->>B: POST
-            /session/extend alt Success B-->>F: 200 OK F-->>I: onSuccess Note
-            over I: Successfully extended user session else Error B-->>F: Error
-            F-->>I: onError Note over I: Error while extending user session end
+            Omnibar cannot track P->>P: Create CustomEvent('extendIdleSession')
+            P->>D: querySelector('[data-omnibar-event-target]') D-->>P: Omnibar
+            event target element P->>O: dispatchEvent(extendIdleSessionEvent)
+            O->>I: hookIntoEvent(EXTEND_IDLE_SESSION) I->>F: extendSession
+            F->>B: POST /session/extend alt Success B-->>F: 200 OK F-->>I:
+            onSuccess Note over I: Successfully extended user session else Error
+            B-->>F: Error F-->>I: onError Note over I: Error while extending
+            user session end
           </div>
         </div>
 
@@ -1240,24 +1241,24 @@
         <div class="diagram-container">
           <div class="diagram-title">Multi-Tab RTS Synchronization Flow</div>
           <div class="mermaid">
-            sequenceDiagram participant A as Tab A Active participant R as RTS
-            Server WebSocket participant B as Tab B Idle participant C as Tab C
-            Idle Note over A,C: User has 3 tabs open with same session A->>A:
-            User clicks to extend session A->>A: POST /session/extend Success
-            A->>R: freshIDPublish channelId RESTART Note over A: Message RESTART
-            with triggeredBy and triggeredAt R->>B: WebSocket broadcast R->>C:
-            WebSocket broadcast R->>A: WebSocket broadcast ignored par Tab B
-            Processing B->>B: processIstRtsMessage B->>B:
-            isMessageIntendedForThisChannelAndAccount YES B->>B: triggeredBy not
-            equal myId YES B->>B: restartTimer B->>B: closeModal if shown B->>B:
-            showToast Session extended and Tab C Processing C->>C:
-            processIstRtsMessage C->>C:
-            isMessageIntendedForThisChannelAndAccount YES C->>C: triggeredBy not
-            equal myId YES C->>C: restartTimer C->>C: closeModal if shown C->>C:
-            showToast Session extended and Tab A Processing A->>A:
-            processIstRtsMessage A->>A: triggeredBy equals myId YES Note over A:
-            Ignores own message end Note over A,C: All tabs now synchronized
-            with reset timers
+            sequenceDiagram participant A as Tab A (Active) participant R as RTS
+            Server (WebSocket) participant B as Tab B (Idle) participant C as
+            Tab C (Idle) Note over A,C: User has 3 tabs open with same session
+            A->>A: User clicks to extend session A->>A: POST /session/extend
+            (Success) A->>R: freshIDPublish(channelId, RESTART) Note over A:
+            Message RESTART with triggeredBy and triggeredAt R->>B: WebSocket
+            broadcast R->>C: WebSocket broadcast R->>A: WebSocket broadcast
+            (ignored) par Tab B Processing B->>B: processIstRtsMessage B->>B:
+            isMessageIntendedForThisChannelAndAccount = YES B->>B: triggeredBy
+            not equal myId = YES B->>B: restartTimer B->>B: closeModal (if
+            shown) B->>B: showToast("Session extended") and Tab C Processing
+            C->>C: processIstRtsMessage C->>C:
+            isMessageIntendedForThisChannelAndAccount = YES C->>C: triggeredBy
+            not equal myId = YES C->>C: restartTimer C->>C: closeModal (if
+            shown) C->>C: showToast("Session extended") and Tab A Processing
+            A->>A: processIstRtsMessage A->>A: triggeredBy equals myId = YES
+            Note over A: Ignores own message end Note over A,C: All tabs now
+            synchronized with reset timers
           </div>
         </div>
 
@@ -1738,16 +1739,16 @@
             participant U as User Note over R,U: Normal Operation - RTS
             Connected R->>A: onDisconnect A->>A: Record disconnectedTime A->>T:
             Schedule polling start after 305 seconds Note over A,T: Wait Period
-            5s plus 300s equals 305 seconds T->>A: Polling timer fires loop
-            Continuous Polling until reconnect A->>A: randomIntFromInterval
-            returns e.g. 47 seconds A->>T: Schedule session call in 47s Note
-            over A: SessionTimeout scheduled invoke after 47 T->>A: Timer fires
-            after 47s A->>S: POST /session S-->>A: Session response A->>A:
-            Validate session state alt Session Valid Note over A: Continue
-            polling loop else Session Invalid or Changed A->>U: Trigger logout
-            event end end R->>A: onReconnect A->>A: Clear disconnectedTime
-            A->>T: Clear polling timer A->>A: Stop active poller Note over R,U:
-            Back to RTS-based sync
+            = 5s + 300s = 305 seconds T->>A: Polling timer fires loop Continuous
+            Polling until reconnect A->>A: randomIntFromInterval returns (e.g.
+            47 seconds) A->>T: Schedule session call in 47s Note over A:
+            SessionTimeout scheduled (invoke after 47) T->>A: Timer fires after
+            47s A->>S: POST /session S-->>A: Session response A->>A: Validate
+            session state alt Session Valid Note over A: Continue polling loop
+            else Session Invalid or Changed A->>U: Trigger logout event end end
+            R->>A: onReconnect A->>A: Clear disconnectedTime A->>T: Clear
+            polling timer A->>A: Stop active poller Note over R,U: Back to
+            RTS-based sync
           </div>
         </div>
 
