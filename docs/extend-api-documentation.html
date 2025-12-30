@@ -1,0 +1,2229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Extend API Documentation | Freshworks Omnibar</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-primary: #0d1117;
+        --bg-secondary: #161b22;
+        --bg-tertiary: #21262d;
+        --bg-accent: #1a1f2e;
+        --text-primary: #e6edf3;
+        --text-secondary: #8b949e;
+        --text-muted: #6e7681;
+        --accent-primary: #58a6ff;
+        --accent-secondary: #7ee787;
+        --accent-warning: #ffa657;
+        --accent-danger: #f85149;
+        --accent-purple: #bc8cff;
+        --border-color: #30363d;
+        --border-highlight: #238636;
+        --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --shadow-glow: 0 0 40px rgba(88, 166, 255, 0.15);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont,
+          sans-serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
+
+      /* Animated background */
+      .bg-pattern {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        background: radial-gradient(
+            circle at 20% 20%,
+            rgba(88, 166, 255, 0.03) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(126, 231, 135, 0.03) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 50% 50%,
+            rgba(188, 140, 255, 0.02) 0%,
+            transparent 50%
+          );
+      }
+
+      /* Header */
+      header {
+        background: linear-gradient(
+          180deg,
+          var(--bg-secondary) 0%,
+          transparent 100%
+        );
+        border-bottom: 1px solid var(--border-color);
+        padding: 2rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(20px);
+      }
+
+      .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .logo {
+        width: 50px;
+        height: 50px;
+        background: var(--gradient-1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.5rem;
+        box-shadow: var(--shadow-glow);
+      }
+
+      .header-title h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        background: linear-gradient(
+          90deg,
+          var(--text-primary),
+          var(--accent-primary)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .header-title p {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      /* Navigation */
+      nav {
+        position: fixed;
+        left: 0;
+        top: 100px;
+        width: 280px;
+        height: calc(100vh - 100px);
+        background: var(--bg-secondary);
+        border-right: 1px solid var(--border-color);
+        padding: 2rem 1.5rem;
+        overflow-y: auto;
+        z-index: 50;
+      }
+
+      nav h3 {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+        padding-left: 0.5rem;
+      }
+
+      nav ul {
+        list-style: none;
+        margin-bottom: 2rem;
+      }
+
+      nav a {
+        display: block;
+        padding: 0.75rem 1rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        font-size: 0.9rem;
+        border-left: 3px solid transparent;
+      }
+
+      nav a:hover {
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+      }
+
+      nav a.active {
+        background: rgba(88, 166, 255, 0.1);
+        color: var(--accent-primary);
+        border-left-color: var(--accent-primary);
+      }
+
+      /* Main content */
+      main {
+        margin-left: 280px;
+        padding: 3rem 4rem;
+        max-width: 1200px;
+      }
+
+      section {
+        margin-bottom: 4rem;
+        animation: fadeInUp 0.5s ease;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      h2 .icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+      }
+
+      h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin: 2rem 0 1rem;
+        color: var(--accent-primary);
+      }
+
+      h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 1.5rem 0 0.75rem;
+        color: var(--text-primary);
+      }
+
+      p {
+        margin-bottom: 1rem;
+        color: var(--text-secondary);
+      }
+
+      /* Cards */
+      .card {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 1.75rem;
+        margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .card:hover {
+        border-color: var(--accent-primary);
+        box-shadow: var(--shadow-glow);
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+      }
+
+      .card-icon.blue {
+        background: rgba(88, 166, 255, 0.15);
+      }
+      .card-icon.green {
+        background: rgba(126, 231, 135, 0.15);
+      }
+      .card-icon.orange {
+        background: rgba(255, 166, 87, 0.15);
+      }
+      .card-icon.purple {
+        background: rgba(188, 140, 255, 0.15);
+      }
+      .card-icon.red {
+        background: rgba(248, 81, 73, 0.15);
+      }
+
+      .card-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+
+      /* Code blocks */
+      .code-block {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        overflow: hidden;
+        margin: 1rem 0;
+      }
+
+      .code-header {
+        background: var(--bg-accent);
+        padding: 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .code-lang {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.8rem;
+        color: var(--accent-primary);
+        font-weight: 500;
+      }
+
+      .code-file {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+
+      .code-content {
+        padding: 1rem 1.25rem;
+        overflow-x: auto;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.85rem;
+        line-height: 1.8;
+      }
+
+      .code-content code {
+        color: var(--text-primary);
+      }
+
+      .code-inline {
+        font-family: "IBM Plex Mono", monospace;
+        background: var(--bg-tertiary);
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.85em;
+        color: var(--accent-secondary);
+      }
+
+      /* Syntax highlighting */
+      .keyword {
+        color: var(--accent-purple);
+      }
+      .string {
+        color: var(--accent-secondary);
+      }
+      .function {
+        color: var(--accent-primary);
+      }
+      .comment {
+        color: var(--text-muted);
+        font-style: italic;
+      }
+      .number {
+        color: var(--accent-warning);
+      }
+      .property {
+        color: #79c0ff;
+      }
+
+      /* Diagrams */
+      .diagram-container {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 2rem;
+        margin: 1.5rem 0;
+        overflow-x: auto;
+      }
+
+      .diagram-container .mermaid {
+        display: flex;
+        justify-content: center;
+      }
+
+      .diagram-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--accent-primary);
+        margin-bottom: 1.5rem;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Tables */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+        background: var(--bg-secondary);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        padding: 1rem 1.25rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      th {
+        background: var(--bg-tertiary);
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      td {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      tr:hover td {
+        background: rgba(88, 166, 255, 0.03);
+      }
+
+      /* Timeline */
+      .timeline {
+        position: relative;
+        padding-left: 2rem;
+        margin: 2rem 0;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(
+          180deg,
+          var(--accent-primary),
+          var(--accent-secondary)
+        );
+        border-radius: 3px;
+      }
+
+      .timeline-item {
+        position: relative;
+        padding: 1rem 0 1.5rem 1.5rem;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -2rem;
+        top: 1.25rem;
+        width: 12px;
+        height: 12px;
+        background: var(--accent-primary);
+        border-radius: 50%;
+        transform: translateX(-4.5px);
+        box-shadow: 0 0 10px var(--accent-primary);
+      }
+
+      .timeline-time {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.85rem;
+        color: var(--accent-warning);
+        font-weight: 500;
+      }
+
+      .timeline-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0.5rem 0;
+      }
+
+      .timeline-desc {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      /* Badges */
+      .badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .badge-blue {
+        background: rgba(88, 166, 255, 0.2);
+        color: var(--accent-primary);
+      }
+      .badge-green {
+        background: rgba(126, 231, 135, 0.2);
+        color: var(--accent-secondary);
+      }
+      .badge-orange {
+        background: rgba(255, 166, 87, 0.2);
+        color: var(--accent-warning);
+      }
+      .badge-purple {
+        background: rgba(188, 140, 255, 0.2);
+        color: var(--accent-purple);
+      }
+
+      /* Alert boxes */
+      .alert {
+        padding: 1.25rem 1.5rem;
+        border-radius: 12px;
+        margin: 1rem 0;
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .alert-icon {
+        font-size: 1.25rem;
+        flex-shrink: 0;
+      }
+
+      .alert-info {
+        background: rgba(88, 166, 255, 0.1);
+        border-left: 4px solid var(--accent-primary);
+      }
+
+      .alert-success {
+        background: rgba(126, 231, 135, 0.1);
+        border-left: 4px solid var(--accent-secondary);
+      }
+
+      .alert-warning {
+        background: rgba(255, 166, 87, 0.1);
+        border-left: 4px solid var(--accent-warning);
+      }
+
+      /* List styles */
+      ul,
+      ol {
+        margin: 1rem 0 1rem 1.5rem;
+        color: var(--text-secondary);
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+
+      /* Flow diagram */
+      .flow-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+      }
+
+      .flow-step {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 1.5rem;
+        position: relative;
+      }
+
+      .flow-step::after {
+        content: "→";
+        position: absolute;
+        right: -1.25rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+        color: var(--accent-primary);
+      }
+
+      .flow-step:last-child::after {
+        display: none;
+      }
+
+      .step-number {
+        width: 32px;
+        height: 32px;
+        background: var(--gradient-1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .step-title {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .step-desc {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        nav {
+          display: none;
+        }
+        main {
+          margin-left: 0;
+          padding: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-pattern"></div>
+
+    <header>
+      <div class="header-content">
+        <div class="logo">🔐</div>
+        <div class="header-title">
+          <h1>/session/extend API Documentation</h1>
+          <p>Freshworks Omnibar • Idle Session Timeout (IST) Feature</p>
+        </div>
+      </div>
+    </header>
+
+    <nav>
+      <h3>Getting Started</h3>
+      <ul>
+        <li><a href="#overview" class="active">Overview</a></li>
+        <li><a href="#api-endpoint">API Endpoint</a></li>
+      </ul>
+      <h3>When API is Called</h3>
+      <ul>
+        <li><a href="#trigger-scenarios">Trigger Scenarios</a></li>
+        <li><a href="#timing-frequency">Timing & Frequency</a></li>
+        <li><a href="#timeline">Call Timeline</a></li>
+      </ul>
+      <h3>Sequence Diagrams</h3>
+      <ul>
+        <li><a href="#automatic-extension">Automatic Extension</a></li>
+        <li><a href="#manual-extension">Manual Extension</a></li>
+        <li><a href="#external-trigger">External Trigger</a></li>
+        <li><a href="#multi-tab-sync">Multi-Tab Sync (RTS)</a></li>
+        <li><a href="#randomized-polling">Randomized Polling</a></li>
+      </ul>
+      <h3>Implementation</h3>
+      <ul>
+        <li><a href="#code-flow">Code Flow</a></li>
+        <li><a href="#key-files">Key Files</a></li>
+        <li><a href="#examples">Code Examples</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <!-- Overview Section -->
+      <section id="overview">
+        <h2>
+          <span class="icon" style="background: var(--gradient-1)">📋</span>
+          Overview
+        </h2>
+
+        <div class="card">
+          <p>
+            The <code class="code-inline">/session/extend</code> API endpoint is
+            a
+            <strong>critical part of the Idle Session Timeout (IST)</strong>
+            feature in the Freshworks Omnibar. It extends the user's session
+            when activity is detected, preventing automatic logout due to
+            inactivity.
+          </p>
+        </div>
+
+        <div class="flow-grid">
+          <div class="flow-step">
+            <div class="step-number">1</div>
+            <div class="step-title">User Activity Detected</div>
+            <div class="step-desc">
+              Click, keydown, or mousemove events are tracked
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="step-number">2</div>
+            <div class="step-title">Timer Check</div>
+            <div class="step-desc">
+              Every 60 seconds, system checks for recent activity
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="step-number">3</div>
+            <div class="step-title">Extend API Call</div>
+            <div class="step-desc">
+              POST request sent to /session/extend endpoint
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="step-number">4</div>
+            <div class="step-title">Session Reset</div>
+            <div class="step-desc">
+              Backend resets idle timer, RTS broadcasts to all tabs
+            </div>
+          </div>
+        </div>
+
+        <div class="alert alert-info">
+          <span class="alert-icon">💡</span>
+          <div>
+            <strong>Key Insight:</strong> The extend API is NOT called on every
+            user action. Instead, it's called at strategic intervals to minimize
+            server load while ensuring session continuity.
+          </div>
+        </div>
+      </section>
+
+      <!-- API Endpoint Section -->
+      <section id="api-endpoint">
+        <h2>
+          <span class="icon" style="background: var(--gradient-3)">🔗</span> API
+          Endpoint
+        </h2>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon blue">📡</div>
+            <div>
+              <div class="card-title">POST /session/extend</div>
+              <span class="badge badge-green">HTTP POST</span>
+            </div>
+          </div>
+        </div>
+
+        <h3>Full URL Format</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">URL</span>
+          </div>
+          <div class="code-content">
+            <code
+              >https://<span class="property">{orgDomain}</span
+              >/api/v2/session/extend?session_token=<span class="property"
+                >{sessionToken}</span
+              ></code
+            >
+          </div>
+        </div>
+
+        <h3>Request Payload</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">JavaScript</span>
+          </div>
+          <div class="code-content">
+            <code
+              >{ <span class="property">session_token</span>:
+              <span class="string">"user_session_token_here"</span>
+              <span class="comment">// User's current session token</span>
+              }</code
+            >
+          </div>
+        </div>
+
+        <h3>Response Handling</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Response Type</th>
+              <th>Callback</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-green">Success</span></td>
+              <td><code class="code-inline">sessionExtendData</code></td>
+              <td>
+                Extends idle session timeout, resets timer to configured
+                duration
+              </td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-orange">Error</span></td>
+              <td><code class="code-inline">sessionExtendDataError</code></td>
+              <td>Returns error details if session cannot be extended</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Trigger Scenarios Section -->
+      <section id="trigger-scenarios">
+        <h2>
+          <span class="icon" style="background: var(--gradient-2)">⚡</span>
+          When is /extend API Called?
+        </h2>
+
+        <p>
+          The <code class="code-inline">/session/extend</code> API is triggered
+          in <strong>three distinct scenarios</strong>:
+        </p>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon blue">🔄</div>
+            <div>
+              <div class="card-title">
+                1. Automatic Extension (Periodic Activity Check)
+              </div>
+              <span class="badge badge-blue">Every 60 seconds</span>
+            </div>
+          </div>
+          <p>
+            <strong>Location:</strong>
+            <code class="code-inline"
+              >omnibar-core/src/components/SessionManager/IST/utils/istChecker.js</code
+            >
+          </p>
+          <ul>
+            <li>
+              Timer polls every <strong>60 seconds</strong> to check user
+              activity
+            </li>
+            <li>Checks if user was active in past 60 seconds</li>
+            <li>
+              Extends session at specific intervals (see timing section below)
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon green">👆</div>
+            <div>
+              <div class="card-title">
+                2. Manual Extension (User Click During Warning Modal)
+              </div>
+              <span class="badge badge-green">On Demand</span>
+            </div>
+          </div>
+          <p>
+            <strong>Location:</strong>
+            <code class="code-inline"
+              >omnibar-core/src/components/SessionManager/IST/IST.js</code
+            >
+          </p>
+          <ul>
+            <li>
+              When idle timer reaches last <strong>80 seconds</strong>, expiry
+              modal is shown
+            </li>
+            <li>User can click anywhere on the page to extend session</li>
+            <li>
+              This immediately calls
+              <code class="code-inline">/extend</code> API
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon purple">📨</div>
+            <div>
+              <div class="card-title">
+                3. External Event Trigger (Product Integration)
+              </div>
+              <span class="badge badge-purple">Custom Event</span>
+            </div>
+          </div>
+          <p>
+            <strong>Location:</strong>
+            <code class="code-inline"
+              >omnibar-core/src/components/SessionManager/IST/IST.js</code
+            >
+          </p>
+          <ul>
+            <li>
+              Host products can dispatch
+              <code class="code-inline">extendIdleSession</code> custom event
+            </li>
+            <li>Used for activities beyond Omnibar's tracking capabilities</li>
+            <li>Examples: phone calls, chat activity in iframes</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Timing & Frequency Section -->
+      <section id="timing-frequency">
+        <h2>
+          <span class="icon" style="background: rgba(255, 166, 87, 0.3)"
+            >⏱️</span
+          >
+          Timing & Frequency
+        </h2>
+
+        <div class="alert alert-warning">
+          <span class="alert-icon">⚠️</span>
+          <div>
+            <strong>Important:</strong> The extend API is called at
+            <strong>specific time windows</strong>, not continuously. This is
+            designed to minimize API calls while maintaining session continuity.
+          </div>
+        </div>
+
+        <h3>Configuration Constants</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">JavaScript</span>
+            <span class="code-file">IstTimer.js</span>
+          </div>
+          <div class="code-content">
+            <code
+              ><span class="keyword">const</span>
+              <span class="property">IST_TIME_CONFIG</span> = {
+              <span class="property">CHECK_FOR_ACTIVENESS_SECONDS</span>:
+              <span class="number">60</span>,
+              <span class="comment">// Poll every 60 seconds</span>
+              <span class="property">STOP_TIMER_BY_SECONDS</span>:
+              <span class="number">60</span>,
+              <span class="comment">// Stop polling 60s before timeout</span>
+              <span class="property">IDEAL_SESSION_TIMER_SECONDS</span>:
+              <span class="number">80</span>
+              <span class="comment">// Show modal in last 80 seconds</span>
+              }</code
+            >
+          </div>
+        </div>
+
+        <h3>Extension Time Windows</h3>
+        <p>
+          The API is called when remaining session time falls within these
+          windows <strong>AND</strong> user was active in the past 60 seconds:
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Time Window</th>
+              <th>Seconds Remaining</th>
+              <th>Duration</th>
+              <th>Call Frequency</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-blue">Window 1</span></td>
+              <td>249 - 240 seconds</td>
+              <td>~9 seconds</td>
+              <td>Every 60s if active</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-green">Window 2</span></td>
+              <td>189 - 180 seconds</td>
+              <td>~9 seconds</td>
+              <td>Every 60s if active</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-orange">Window 3</span></td>
+              <td>129 - 120 seconds</td>
+              <td>~9 seconds</td>
+              <td>Every 60s if active</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-purple">Window 4</span></td>
+              <td>69 - 60 seconds</td>
+              <td>~9 seconds</td>
+              <td>Every 60s if active</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Extension Check Logic</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">JavaScript</span>
+            <span class="code-file">istChecker.js</span>
+          </div>
+          <div class="code-content">
+            <code
+              ><span class="comment"
+                >// Check if it's the right time to extend</span
+              >
+              <span class="keyword">const</span>
+              <span class="property">isRightTimeToExtend</span> =
+              idleSecondsRemaining % <span class="number">60</span> <
+              <span class="number">10</span>
+
+              <span class="comment">// Example: If 247 seconds remaining:</span>
+              <span class="comment"
+                >// 247 % 60 = 7 → 7 < 10 = true → Right time to extend!</span
+              >
+
+              <span class="keyword">if</span> (isRightTimeToExtend &&
+              wasUserActiveInXSeconds) { notifier.<span class="function"
+                >extendUserSession</span
+              >() <span class="comment">// Calls /extend API</span> }</code
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Timeline Section -->
+      <section id="timeline">
+        <h2>
+          <span class="icon" style="background: rgba(126, 231, 135, 0.3)"
+            >📊</span
+          >
+          Call Timeline Example
+        </h2>
+
+        <p>
+          Assuming a <strong>15-minute (900 seconds)</strong> session timeout:
+        </p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">T+0s (Session Start)</div>
+            <div class="timeline-title">Session Initialized</div>
+            <div class="timeline-desc">
+              Idle timer starts at 900 seconds. Activity tracking begins (click,
+              keydown, mousemove).
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">T+60s → T+651s</div>
+            <div class="timeline-title">Regular Polling</div>
+            <div class="timeline-desc">
+              Timer polls every 60s. At each window (249-240s, 189-180s, etc.),
+              checks if user was active and calls /extend if so.
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">T+820s (80 seconds remaining)</div>
+            <div class="timeline-title">Expiry Modal Appears</div>
+            <div class="timeline-desc">
+              Warning modal shown to user. Event listeners change to CLICK only.
+              User can click to extend.
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">User Clicks</div>
+            <div class="timeline-title">Manual Extension</div>
+            <div class="timeline-desc">
+              /extend API called immediately. Progress indicator shown. Timer
+              resets to 900s on success.
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">T+900s (No Activity)</div>
+            <div class="timeline-title">Session Expires</div>
+            <div class="timeline-desc">
+              /session/invalidate called. User is logged out. RTS broadcasts
+              logout to all tabs.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Automatic Extension Sequence Diagram -->
+      <section id="automatic-extension">
+        <h2>
+          <span class="icon" style="background: rgba(88, 166, 255, 0.3)"
+            >🔄</span
+          >
+          Sequence Diagram: Automatic Extension
+        </h2>
+
+        <p>
+          This diagram shows the automatic session extension flow when user
+          activity is detected during periodic checks.
+        </p>
+
+        <div class="diagram-container">
+          <div class="diagram-title">
+            Automatic Extension Flow (Every 60 seconds)
+          </div>
+          <div class="mermaid">
+            sequenceDiagram participant U as User participant W as Window/DOM
+            participant E as Event Helper participant T as IST Timer participant
+            C as IST Checker participant I as IST Component participant F as
+            Fetch/API participant B as Backend participant R as RTS Server Note
+            over U,R: Session starts - Timer initialized U->>W: User activity
+            click keydown mousemove W->>E: Event triggered E->>E: Update
+            lastActiveTime loop Every 60 seconds T->>C: Timer tick
+            MAIN_TIMER_RUNNING C->>E: getLastActiveTime E-->>C: lastActiveTime
+            C->>C: isUserActiveInXSeconds alt User was active in last 60s AND
+            right time window C->>I: notifier.extendUserSession I->>F: getData
+            activities.sessionExtend F->>B: POST /session/extend B-->>F: Success
+            Response F-->>I: onSessionExtendSuccess I->>R: Publish RESTART event
+            R-->>I: Broadcast to all tabs I->>T: restart timer 900s Note over I:
+            Timer reset to full duration else User was NOT active Note over C:
+            Continue countdown end end
+          </div>
+        </div>
+      </section>
+
+      <!-- Manual Extension Sequence Diagram -->
+      <section id="manual-extension">
+        <h2>
+          <span class="icon" style="background: rgba(126, 231, 135, 0.3)"
+            >👆</span
+          >
+          Sequence Diagram: Manual Extension
+        </h2>
+
+        <p>
+          This diagram shows the flow when a user manually extends their session
+          by clicking during the warning modal.
+        </p>
+
+        <div class="diagram-container">
+          <div class="diagram-title">
+            Manual Extension Flow (Last 80 seconds)
+          </div>
+          <div class="mermaid">
+            sequenceDiagram participant U as User participant M as Expiry Modal
+            participant I as IST Component participant E as Event Helper
+            participant F as Fetch/API participant B as Backend participant R as
+            RTS Server participant O as Other Tabs Note over U,O: Timer reaches
+            80 seconds remaining I->>M: Show expiry modal I->>E: updateListeners
+            - CLICK only M->>U: Display Session expiring warning U->>M: Clicks
+            anywhere on page M->>I: onWindowClick I->>E: resetListeners -
+            restore all events I->>M: Show progress indicator I->>F:
+            extendUserSession F->>B: POST /session/extend alt Success B-->>F:
+            200 OK F-->>I: onSessionExtendSuccess I->>R: freshIDPublish RESTART
+            R->>O: WebSocket broadcast RESTART O->>O: Reset timers and close
+            modals I->>M: closeModal I->>I: showSessionExtensionToast Note over
+            I: Session extended successfully else Error B-->>F: Error response
+            F-->>I: onSessionExtendError Note over I: Log error no retry end
+          </div>
+        </div>
+      </section>
+
+      <!-- External Trigger Sequence Diagram -->
+      <section id="external-trigger">
+        <h2>
+          <span class="icon" style="background: rgba(188, 140, 255, 0.3)"
+            >📨</span
+          >
+          Sequence Diagram: External Event Trigger
+        </h2>
+
+        <p>
+          This diagram shows how external products can trigger session extension
+          via custom events.
+        </p>
+
+        <div class="diagram-container">
+          <div class="diagram-title">
+            External Event Trigger Flow (Product Integration)
+          </div>
+          <div class="mermaid">
+            sequenceDiagram participant P as Product e.g. Freshcaller
+            participant D as DOM participant O as Omnibar Event Target
+            participant I as IST Component participant F as Fetch/API
+            participant B as Backend Note over P,B: Product detects activity
+            Omnibar cannot track P->>P: Create CustomEvent extendIdleSession
+            P->>D: querySelector data-omnibar-event-target D-->>P: Omnibar event
+            target element P->>O: dispatchEvent extendIdleSessionEvent O->>I:
+            hookIntoEvent EXTEND_IDLE_SESSION I->>F: extendSession F->>B: POST
+            /session/extend alt Success B-->>F: 200 OK F-->>I: onSuccess Note
+            over I: Successfully extended user session else Error B-->>F: Error
+            F-->>I: onError Note over I: Error while extending user session end
+          </div>
+        </div>
+
+        <h3>Product Integration Example</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">JavaScript</span>
+            <span class="code-file">Your Product Code</span>
+          </div>
+          <div class="code-content">
+            <code
+              ><span class="comment"
+                >// When your product detects activity that Omnibar can't
+                track</span
+              >
+              <span class="comment"
+                >// (e.g., phone call answered, chat message in iframe)</span
+              >
+
+              <span class="keyword">function</span>
+              <span class="function">extendOmnibarSession</span>() {
+              <span class="comment">// Create the custom event</span>
+              <span class="keyword">var</span> extendIdleSessionEvent =
+              <span class="keyword">new</span>
+              <span class="function">CustomEvent</span>(<span class="string"
+                >'extendIdleSession'</span
+              >)
+
+              <span class="comment">// Find the Omnibar event target</span>
+              <span class="keyword">var</span> eventTarget = document.<span
+                class="function"
+                >querySelector</span
+              >(<span class="string">'[data-omnibar-event-target]'</span>)
+
+              <span class="comment"
+                >// Dispatch the event to trigger session extension</span
+              >
+              <span class="keyword">if</span> (eventTarget) { eventTarget.<span
+                class="function"
+                >dispatchEvent</span
+              >(extendIdleSessionEvent) console.<span class="function">log</span
+              >(<span class="string">'Session extension requested'</span>) } }
+
+              <span class="comment">// Example usage in Freshcaller:</span>
+              phoneCall.<span class="function">on</span>(<span class="string"
+                >'answered'</span
+              >, () => { <span class="function">extendOmnibarSession</span>()
+              })</code
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Multi-Tab Sync Sequence Diagram -->
+      <section id="multi-tab-sync">
+        <h2>
+          <span class="icon" style="background: rgba(248, 81, 73, 0.3)"
+            >🔗</span
+          >
+          Sequence Diagram: Multi-Tab Synchronization (RTS)
+        </h2>
+
+        <p>
+          This diagram shows how session extension is synchronized across
+          multiple browser tabs using RTS (Real-Time Switching).
+        </p>
+
+        <div class="diagram-container">
+          <div class="diagram-title">Multi-Tab RTS Synchronization Flow</div>
+          <div class="mermaid">
+            sequenceDiagram participant A as Tab A Active participant R as RTS
+            Server WebSocket participant B as Tab B Idle participant C as Tab C
+            Idle Note over A,C: User has 3 tabs open with same session A->>A:
+            User clicks to extend session A->>A: POST /session/extend Success
+            A->>R: freshIDPublish channelId RESTART Note over A: Message RESTART
+            with triggeredBy and triggeredAt R->>B: WebSocket broadcast R->>C:
+            WebSocket broadcast R->>A: WebSocket broadcast ignored par Tab B
+            Processing B->>B: processIstRtsMessage B->>B:
+            isMessageIntendedForThisChannelAndAccount YES B->>B: triggeredBy not
+            equal myId YES B->>B: restartTimer B->>B: closeModal if shown B->>B:
+            showToast Session extended and Tab C Processing C->>C:
+            processIstRtsMessage C->>C:
+            isMessageIntendedForThisChannelAndAccount YES C->>C: triggeredBy not
+            equal myId YES C->>C: restartTimer C->>C: closeModal if shown C->>C:
+            showToast Session extended and Tab A Processing A->>A:
+            processIstRtsMessage A->>A: triggeredBy equals myId YES Note over A:
+            Ignores own message end Note over A,C: All tabs now synchronized
+            with reset timers
+          </div>
+        </div>
+
+        <h3>RTS Message Format</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">JavaScript</span>
+            <span class="code-file">istRts.js</span>
+          </div>
+          <div class="code-content">
+            <code
+              ><span class="keyword">const</span>
+              <span class="property">IST_RTS_EVENTS</span> = {
+              <span class="property">RESTART</span>: {
+              <span class="property">message</span>:
+              <span class="string">'RESTART'</span>,
+              <span class="property">triggeredBy</span>:
+              <span class="string">'rtsInstanceId_12345'</span>,
+              <span class="comment">// Unique tab ID</span>
+              <span class="property">triggeredAt</span>:
+              <span class="string">'Mon Dec 29 2025 10:30:45 GMT+0000'</span> }
+              }</code
+            >
+          </div>
+        </div>
+
+        <h3>Key Validations</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Validation</th>
+              <th>Purpose</th>
+              <th>Implementation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Channel Validation</td>
+              <td>Only process messages from correct channel</td>
+              <td>
+                <code class="code-inline">idleSessionTimeoutChannelId</code>
+              </td>
+            </tr>
+            <tr>
+              <td>Account Validation</td>
+              <td>Ensure message is for correct user</td>
+              <td><code class="code-inline">accId</code> matching</td>
+            </tr>
+            <tr>
+              <td>Self-Processing Prevention</td>
+              <td>Tab ignores its own broadcast</td>
+              <td>
+                <code class="code-inline">triggeredBy !== rtsInstanceId</code>
+              </td>
+            </tr>
+            <tr>
+              <td>Message Type Check</td>
+              <td>Only process RESTART events</td>
+              <td>
+                <code class="code-inline">event.message === 'RESTART'</code>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Code Flow Section -->
+      <section id="code-flow">
+        <h2>
+          <span class="icon" style="background: var(--gradient-1)">⚙️</span>
+          Complete Code Flow
+        </h2>
+
+        <div class="diagram-container">
+          <div class="diagram-title">End-to-End Code Flow</div>
+          <div class="mermaid">
+            flowchart TB subgraph UserActivity["User Activity"] A1[Click] --> E
+            A2[Keydown] --> E A3[Mousemove] --> E E[istEventsHelper.js] -->
+            F[Update lastActiveTime] end subgraph TimerSystem["Timer System"]
+            T1[IstTimer.js] -->|Every 60s| T2[MAIN_TIMER_RUNNING] T2 -->
+            T3[istChecker.js] T3 --> T4{User active in last 60s} T4 -->|Yes|
+            T5{Right time window} T4 -->|No| T6[Continue countdown] T5 -->|Yes|
+            T7[extendUserSession] T5 -->|No| T6 end subgraph ExtendAPI["Extend
+            API"] T7 --> API1[IST.js extendSession] API1 --> API2[Fetch.js
+            getData] API2 --> API3[activities.sessionExtend] API3 --> API4[POST
+            /session/extend] end subgraph Success["Success Handling"] API4
+            -->|200 OK| S1[onSessionExtendSuccess] S1 --> S2{RTS Connected} S2
+            -->|Yes| S3[Publish RESTART to RTS] S2 -->|No| S4[Restart timer
+            locally] S3 --> S5[All tabs receive broadcast] S5 --> S6[Reset
+            timers everywhere] S1 --> S7{Modal shown} S7 -->|Yes| S8[Close modal
+            and Show toast] end F --> T3 style UserActivity
+            fill:#1a2744,stroke:#58a6ff style TimerSystem
+            fill:#1a3330,stroke:#7ee787 style ExtendAPI
+            fill:#2d2a1a,stroke:#ffa657 style Success
+            fill:#1a2744,stroke:#bc8cff
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Files Section -->
+      <section id="key-files">
+        <h2>
+          <span class="icon" style="background: rgba(188, 140, 255, 0.3)"
+            >📁</span
+          >
+          Key Files
+        </h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>File</th>
+              <th>Purpose</th>
+              <th>Key Functions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code class="code-inline">IST/IST.js</code></td>
+              <td>Main IST component, manages state and API calls</td>
+              <td>extendSession(), onSessionExtendSuccess()</td>
+            </tr>
+            <tr>
+              <td><code class="code-inline">IST/utils/istChecker.js</code></td>
+              <td>Timer logic and automatic extension triggers</td>
+              <td>validateSessionIST(), initRtsIST()</td>
+            </tr>
+            <tr>
+              <td><code class="code-inline">IST/utils/IstTimer.js</code></td>
+              <td>Timer initialization and management</td>
+              <td>initTimer(), restartTimer(), clearTimer()</td>
+            </tr>
+            <tr>
+              <td><code class="code-inline">IST/utils/istRts.js</code></td>
+              <td>RTS message handling for multi-tab sync</td>
+              <td>processIstRtsMessage(), initRts()</td>
+            </tr>
+            <tr>
+              <td>
+                <code class="code-inline">IST/utils/istEventsHelper.js</code>
+              </td>
+              <td>User activity tracking</td>
+              <td>getLastActiveTime(), attachEvents()</td>
+            </tr>
+            <tr>
+              <td><code class="code-inline">Fetch/activities.js</code></td>
+              <td>API endpoint definitions</td>
+              <td>sessionExtend activity definition</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Code Examples Section -->
+      <section id="examples">
+        <h2>
+          <span class="icon" style="background: rgba(126, 231, 135, 0.3)"
+            >💻</span
+          >
+          Code Examples
+        </h2>
+
+        <h3>1. Activity Definition</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">JavaScript</span>
+            <span class="code-file">Fetch/activities.js</span>
+          </div>
+          <div class="code-content">
+            <code
+              ><span class="property">sessionExtend</span>: {
+              <span class="property">endPoint</span>:
+              <span class="string">'/session/extend'</span>,
+              <span class="property">successListener</span>:
+              <span class="string">'sessionExtendData'</span>,
+              <span class="property">errorListener</span>:
+              <span class="string">'sessionExtendDataError'</span>,
+              <span class="property">httpMethod</span>: POST }</code
+            >
+          </div>
+        </div>
+
+        <h3>2. Extend Session Function</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">JavaScript</span>
+            <span class="code-file">IST/IST.js</span>
+          </div>
+          <div class="code-content">
+            <code
+              ><span class="keyword">const</span>
+              <span class="function">extendSession</span> = ({ fetchHelper,
+              orgDomain, sessionToken, onSuccess, onError }) =>
+              <span class="function">getData</span>({ fetchHelper, orgDomain,
+              <span class="property">activity</span>: activities.sessionExtend,
+              <span class="property">payload</span>: {
+              <span class="property">session_token</span>: sessionToken },
+              <span class="property">successCallBack</span>: onSuccess,
+              <span class="property">errorCallBack</span>: onError })</code
+            >
+          </div>
+        </div>
+
+        <h3>3. Timer Extension Check</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">JavaScript</span>
+            <span class="code-file">IST/utils/istChecker.js</span>
+          </div>
+          <div class="code-content">
+            <code
+              ><span class="keyword">const</span>
+              <span class="function">validateSessionIST</span> = ({ notifier,
+              idleSecondsRemaining }) => {
+              <span class="keyword">const</span> wasUserActiveInXSeconds =
+              <span class="function">isUserActiveInXSeconds</span>(
+              CHECK_FOR_ACTIVENESS_SECONDS,
+              <span class="comment">// 60 seconds</span>
+              <span class="function">getLastActiveTime</span>() )
+
+              <span class="comment"
+                >// Check if remaining time is in extension window</span
+              >
+              <span class="comment"
+                >// e.g., 247 % 60 = 7, and 7 < 10, so it's right time</span
+              >
+              <span class="keyword">const</span> isRightTimeToExtend =
+              idleSecondsRemaining % CHECK_FOR_ACTIVENESS_SECONDS <
+              <span class="number">10</span>
+
+              <span class="keyword">if</span> (isRightTimeToExtend &&
+              wasUserActiveInXSeconds) { notifier.<span class="function"
+                >extendUserSession</span
+              >() <span class="comment">// Trigger /extend API</span> }
+              <span class="keyword">else if</span> (idleSecondsRemaining <=
+              <span class="number">80</span>) { notifier.<span class="function"
+                >showExpiryModal</span
+              >(idleSecondsRemaining) } }</code
+            >
+          </div>
+        </div>
+
+        <h3>4. Success Handler with RTS</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">JavaScript</span>
+            <span class="code-file">IST/IST.js</span>
+          </div>
+          <div class="code-content">
+            <code
+              ><span class="keyword">const</span>
+              <span class="function">onSessionExtendSuccess</span> = () => {
+              <span class="comment">// Broadcast to all tabs via RTS</span>
+              <span class="keyword">if</span> (rtsConnectionRef.current) {
+              <span class="keyword">const</span> rtsInstance =
+              <span class="function">getRTSInstance</span>() rtsInstance &&
+              rtsInstance.<span class="function">freshIDPublish</span>(
+              istConfig.rts.idleSessionTimeoutChannelId, IST_RTS_EVENTS.RESTART
+              ) <span class="function">restart</span>({ updatedISTConfigured:
+              istConfig.idleSessionConfigured, notifier }) }
+
+              <span class="comment"
+                >// Close modal and show toast if modal was shown</span
+              >
+              <span class="keyword">if</span> (showModalRef.current) {
+              <span class="function">closeModal</span>()
+              <span class="function">showSessionExtensionToast</span>(<span
+                class="string"
+                >'Session extended successfully'</span
+              >) } }</code
+            >
+          </div>
+        </div>
+
+        <h3>5. User Activity Tracking</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">JavaScript</span>
+            <span class="code-file">IST/utils/istEventsHelper.js</span>
+          </div>
+          <div class="code-content">
+            <code
+              ><span class="keyword">let</span> lastActiveTimeWindow
+
+              <span class="keyword">const</span>
+              <span class="function">getLastActiveTime</span> = () =>
+              lastActiveTimeWindow
+
+              <span class="keyword">const</span>
+              <span class="function">_eventHandler</span> = (event) => {
+              logger.<span class="function">log</span>(<span class="string"
+                >`istEvents window ${event && event.type}`</span
+              >) lastActiveTimeWindow = Date.<span class="function">now</span>()
+              <span class="comment">// Update on any activity</span>
+              }
+
+              <span class="keyword">const</span>
+              <span class="function">attachEvents</span> = (eventsToAttach,
+              eventHandler = _eventHandler) => {
+              <span class="function">attachWindowEvents</span>(eventsToAttach,
+              eventHandler)
+              <span class="function">attachIFrameEvents</span>(eventsToAttach,
+              eventHandler) }</code
+            >
+          </div>
+        </div>
+
+        <h3>6. Check Activity in Time Window</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">JavaScript</span>
+            <span class="code-file">IST/utils/istUtils.js</span>
+          </div>
+          <div class="code-content">
+            <code
+              ><span class="keyword">const</span>
+              <span class="function">isUserActiveInXSeconds</span> = (seconds,
+              lastActiveTime) => {
+              <span class="keyword">const</span> currentTime =
+              <span class="keyword">new</span>
+              <span class="function">Date</span>()
+              <span class="keyword">const</span> timeDifference = (currentTime -
+              lastActiveTime) / <span class="number">1000</span>
+              <span class="keyword">return</span> timeDifference <= seconds }
+
+              <span class="comment">// Example:</span>
+              <span class="comment">// lastActiveTime = 30 seconds ago</span>
+              <span class="comment"
+                >// isUserActiveInXSeconds(60, lastActiveTime) → true</span
+              >
+              <span class="comment"
+                >// (30 <= 60, so user was active)</span
+              ></code
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Randomized Polling Section -->
+      <section id="randomized-polling">
+        <h2>
+          <span class="icon" style="background: rgba(255, 166, 87, 0.3)"
+            >🎲</span
+          >
+          Randomized Polling (Fallback Mechanism)
+        </h2>
+
+        <p>
+          When the RTS (WebSocket) connection is unavailable or disconnected,
+          the system falls back to <strong>randomized polling</strong> to check
+          session validity and prevent thundering herd problems.
+        </p>
+
+        <div class="alert alert-warning">
+          <span class="alert-icon">⚠️</span>
+          <div>
+            <strong>Why Randomized Polling?</strong> When thousands of users
+            lose RTS connection simultaneously (e.g., server restart), we don't
+            want all of them hitting the session API at the exact same time.
+            Randomization spreads the load across time.
+          </div>
+        </div>
+
+        <h3>Configuration Constants</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">JavaScript</span>
+            <span class="code-file">const.js</span>
+          </div>
+          <div class="code-content">
+            <code
+              ><span class="property">POLLING</span>: {
+              <span class="property">POLL_START_TIME_IN_SEC</span>:
+              <span class="number">5</span>,
+              <span class="comment"
+                >// Wait 5s before starting poll checks</span
+              >
+              <span class="property">MAX_WAIT_TIME_WITHOUT_POLLING_IN_SEC</span
+              >: <span class="number">300</span>,
+              <span class="comment"
+                >// 5 minutes max wait before polling starts</span
+              >
+              <span class="property">INTERVALS</span>: {
+              <span class="property">MIN_WAIT_IN_SEC</span>:
+              <span class="number">10</span>,
+              <span class="comment">// Minimum random delay: 10 seconds</span>
+              <span class="property">MAX_WAIT_IN_SEC</span>:
+              <span class="number">300</span>
+              <span class="comment">// Maximum random delay: 5 minutes</span> }
+              }</code
+            >
+          </div>
+        </div>
+
+        <h3>How Random Delay is Calculated</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">JavaScript</span>
+            <span class="code-file">autologout.js</span>
+          </div>
+          <div class="code-content">
+            <code
+              ><span class="keyword">const</span>
+              <span class="function">randomIntFromInterval</span> = () => {
+              <span class="comment"
+                >// Generate random delay between MIN_WAIT_IN_SEC and
+                MAX_WAIT_IN_SEC (inclusive)</span
+              >
+              <span class="comment"
+                >// MIN = 10 seconds, MAX = 300 seconds (5 minutes)</span
+              >
+              <span class="keyword">return</span> Math.<span class="function"
+                >floor</span
+              >( Math.<span class="function">random</span>() * (MAX_WAIT_IN_SEC
+              - MIN_WAIT_IN_SEC + <span class="number">1</span>) +
+              MIN_WAIT_IN_SEC ) }
+
+              <span class="comment">// Example outputs:</span>
+              <span class="comment"
+                >// randomIntFromInterval() → 47 (47 seconds delay)</span
+              >
+              <span class="comment"
+                >// randomIntFromInterval() → 182 (182 seconds delay)</span
+              >
+              <span class="comment"
+                >// randomIntFromInterval() → 10 (10 seconds delay -
+                minimum)</span
+              >
+              <span class="comment"
+                >// randomIntFromInterval() → 300 (300 seconds delay -
+                maximum)</span
+              ></code
+            >
+          </div>
+        </div>
+
+        <h3>When Randomized Polling is Triggered</h3>
+
+        <div class="flow-grid">
+          <div class="flow-step">
+            <div class="step-number">1</div>
+            <div class="step-title">RTS Disconnects</div>
+            <div class="step-desc">
+              WebSocket connection lost. System records disconnect time.
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="step-number">2</div>
+            <div class="step-title">Wait Period</div>
+            <div class="step-desc">
+              Waits 305 seconds (5s + 300s) before starting polling.
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="step-number">3</div>
+            <div class="step-title">Random Delay</div>
+            <div class="step-desc">
+              Each poll scheduled with random 10-300s delay.
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="step-number">4</div>
+            <div class="step-title">Session Check</div>
+            <div class="step-desc">
+              POST /session API called to validate session.
+            </div>
+          </div>
+        </div>
+
+        <h3>Sequence Diagram: Randomized Polling Flow</h3>
+        <div class="diagram-container">
+          <div class="diagram-title">
+            RTS Disconnect to Randomized Polling to RTS Reconnect
+          </div>
+          <div class="mermaid">
+            sequenceDiagram participant R as RTS WebSocket participant A as
+            AutoLogout participant T as Timer participant S as Session API
+            participant U as User Note over R,U: Normal Operation - RTS
+            Connected R->>A: onDisconnect A->>A: Record disconnectedTime A->>T:
+            Schedule polling start after 305 seconds Note over A,T: Wait Period
+            5s plus 300s equals 305 seconds T->>A: Polling timer fires loop
+            Continuous Polling until reconnect A->>A: randomIntFromInterval
+            returns e.g. 47 seconds A->>T: Schedule session call in 47s Note
+            over A: SessionTimeout scheduled invoke after 47 T->>A: Timer fires
+            after 47s A->>S: POST /session S-->>A: Session response A->>A:
+            Validate session state alt Session Valid Note over A: Continue
+            polling loop else Session Invalid or Changed A->>U: Trigger logout
+            event end end R->>A: onReconnect A->>A: Clear disconnectedTime
+            A->>T: Clear polling timer A->>A: Stop active poller Note over R,U:
+            Back to RTS-based sync
+          </div>
+        </div>
+
+        <h3>Polling Implementation</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">JavaScript</span>
+            <span class="code-file">autologout.js</span>
+          </div>
+          <div class="code-content">
+            <code
+              ><span class="keyword">const</span>
+              <span class="function">makeSessionCall</span> = ({ fetchHelper,
+              config, onSessionSuccess, fromDisconnect, message }) => {
+              <span class="function">clearTimeout</span>(sessionCallTimer)
+
+              <span class="keyword">const</span> sessionCallPromise =
+              <span class="keyword">new</span>
+              <span class="function">Promise</span>((resolve, _) => {
+              <span class="comment"
+                >// Get random delay between 10-300 seconds</span
+              >
+              <span class="keyword">const</span> delay =
+              <span class="function">randomIntFromInterval</span>() logger.<span
+                class="function"
+                >log</span
+              >(<span class="string"
+                >`longPolling: SessionTimeout scheduled at ${new Date()}`</span
+              >) logger.<span class="function">log</span>(<span class="string"
+                >`invoke after ${delay} seconds`</span
+              >) sessionCallTimer = <span class="function">setTimeout</span>(()
+              => { logger.<span class="function">log</span>(<span class="string"
+                >`longPolling: SessionTimeout invoked at ${new Date()}`</span
+              >)
+
+              <span class="comment"
+                >// Check if still disconnected (may have reconnected during
+                wait)</span
+              >
+              <span class="keyword">if</span> (!disconnectedTime &&
+              fromDisconnect) { <span class="function">resolve</span>()
+              <span class="keyword">return</span>
+              }
+
+              <span class="comment">// Make session API call</span>
+              SessionLogout.<span class="function">init</span>({ fetchHelper,
+              config, <span class="property">shouldPoll</span>:
+              <span class="keyword">false</span>, onSessionSuccess })
+
+              <span class="function">resolve</span>() }, delay *
+              <span class="number">1000</span>) })
+
+              <span class="keyword">return</span> { stopTimer,
+              sessionCallPromise } }</code
+            >
+          </div>
+        </div>
+
+        <h3>Continuous Polling Loop</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">JavaScript</span>
+            <span class="code-file">autologout.js</span>
+          </div>
+          <div class="code-content">
+            <code
+              ><span class="keyword">const</span>
+              <span class="function">pollSessionCall</span> = ({ fetchHelper,
+              config, onSessionSuccess }) => {
+              <span class="comment"
+                >// Initial session call with random delay</span
+              >
+              <span class="keyword">let</span> result =
+              <span class="function">makeSessionCall</span>({ fetchHelper,
+              config, onSessionSuccess,
+              <span class="property">fromDisconnect</span>:
+              <span class="keyword">true</span>,
+              <span class="property">message</span>:
+              <span class="string">'onDisconnect'</span>
+              })
+
+              <span class="keyword">const</span>
+              <span class="function">pollSession</span> = () => {
+              result.sessionCallPromise.<span class="function">then</span>(() =>
+              { result.<span class="function">stopTimer</span>()
+
+              <span class="comment">// Stop if RTS reconnected</span>
+              <span class="keyword">if</span> (!disconnectedTime)
+              <span class="keyword">return</span>
+
+              <span class="comment"
+                >// Schedule next poll with NEW random delay</span
+              >
+              result = <span class="function">makeSessionCall</span>({
+              fetchHelper, config, onSessionSuccess,
+              <span class="property">fromDisconnect</span>:
+              <span class="keyword">true</span>,
+              <span class="property">message</span>:
+              <span class="string">'onDisconnect'</span>
+              })
+
+              <span class="comment">// Recursively continue polling</span>
+              result.sessionCallPromise.<span class="function">then</span
+              >(pollSession) }) } result.sessionCallPromise.<span
+                class="function"
+                >then</span
+              >(pollSession)
+
+              <span class="keyword">return</span> {
+              <span class="property">stopPolling</span>: () => result.<span
+                class="function"
+                >stopTimer</span
+              >() } }</code
+            >
+          </div>
+        </div>
+
+        <h3>Example Timeline: Randomized Polling in Action</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">T+0s</div>
+            <div class="timeline-title">RTS Disconnects</div>
+            <div class="timeline-desc">
+              WebSocket connection lost.
+              <code class="code-inline">disconnectedTime = new Date()</code>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">T+305s (5min 5s)</div>
+            <div class="timeline-title">Polling Starts</div>
+            <div class="timeline-desc">
+              After waiting
+              <code class="code-inline"
+                >POLL_START_TIME + MAX_WAIT_WITHOUT_POLLING</code
+              >
+              (5 + 300 = 305 seconds)
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">T+305s</div>
+            <div class="timeline-title">First Random Delay: 47s</div>
+            <div class="timeline-desc">
+              <code class="code-inline">randomIntFromInterval()</code> returns
+              47. Session call scheduled for T+352s.
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">T+352s</div>
+            <div class="timeline-title">First Session API Call</div>
+            <div class="timeline-desc">
+              POST /session called. Session validated. Next poll scheduled.
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">T+352s</div>
+            <div class="timeline-title">Second Random Delay: 182s</div>
+            <div class="timeline-desc">
+              <code class="code-inline">randomIntFromInterval()</code> returns
+              182. Next call at T+534s.
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">T+400s</div>
+            <div class="timeline-title">RTS Reconnects!</div>
+            <div class="timeline-desc">
+              <code class="code-inline">disconnectedTime = null</code>. Polling
+              stopped. Timer cleared. Back to RTS sync.
+            </div>
+          </div>
+        </div>
+
+        <h3>Polling Behavior Comparison</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Aspect</th>
+              <th>Fixed Interval Polling</th>
+              <th>Randomized Polling (Current)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Delay Pattern</strong></td>
+              <td>Every 60 seconds exactly</td>
+              <td>Random 10-300 seconds each time</td>
+            </tr>
+            <tr>
+              <td><strong>Server Load</strong></td>
+              <td>⚠️ Spiky - all clients hit at same time</td>
+              <td>✅ Distributed - spread across time</td>
+            </tr>
+            <tr>
+              <td><strong>Thundering Herd</strong></td>
+              <td>❌ High risk after server restart</td>
+              <td>✅ Mitigated by randomization</td>
+            </tr>
+            <tr>
+              <td><strong>Predictability</strong></td>
+              <td>Predictable timing</td>
+              <td>Unpredictable but bounded</td>
+            </tr>
+            <tr>
+              <td><strong>Use Case</strong></td>
+              <td>IST timer (activity checking)</td>
+              <td>Session validation when RTS down</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>RTS Reconnection Handling</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">JavaScript</span>
+            <span class="code-file">autologout.js</span>
+          </div>
+          <div class="code-content">
+            <code
+              ><span class="keyword">const</span>
+              <span class="function">onReconnect</span> = ({ fetchHelper,
+              config, onSessionSuccess }) => {
+              <span class="keyword">if</span> (!disconnectedTime)
+              <span class="keyword">return</span>
+
+              <span class="keyword">let</span> reconnectedTime =
+              <span class="keyword">new</span>
+              <span class="function">Date</span>()
+              <span class="keyword">const</span> disconnectedFor =
+              (reconnectedTime.<span class="function">getTime</span>() -
+              disconnectedTime.<span class="function">getTime</span>()) /
+              <span class="number">1000</span>
+
+              logger.<span class="function">log</span>(<span class="string"
+                >`Disconnection loop happened for ${disconnectedFor} sec`</span
+              >)
+
+              <span class="comment">// Clear all polling state</span>
+              disconnectedTime = <span class="keyword">null</span>
+              <span class="function">clearTimeout</span>(pollingTimer)
+              pollingTimer = <span class="keyword">null</span>
+
+              <span class="keyword">if</span> (poller) { poller.<span
+                class="function"
+                >stopPolling</span
+              >() poller = <span class="keyword">null</span>
+              }
+
+              <span class="comment"
+                >// If disconnected for more than POLL_START_TIME_IN_SEC, do one
+                final session check</span
+              >
+              <span class="keyword">if</span> (disconnectedFor >=
+              POLL_START_TIME_IN_SEC) {
+              <span class="function">onReconnectRetrySessionCall</span>({
+              fetchHelper, config, onSessionSuccess }) } }</code
+            >
+          </div>
+        </div>
+
+        <div class="alert alert-info">
+          <span class="alert-icon">💡</span>
+          <div>
+            <strong>Key Insight:</strong> Randomized polling is
+            <strong>only active when RTS is disconnected</strong>. Once
+            WebSocket reconnects, polling stops immediately and RTS takes over
+            for real-time synchronization.
+          </div>
+        </div>
+      </section>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>
+          <span class="icon" style="background: var(--gradient-2)">📝</span>
+          Summary
+        </h2>
+
+        <div class="alert alert-success">
+          <span class="alert-icon">✅</span>
+          <div>
+            <strong>Key Takeaways:</strong>
+            <ul style="margin-top: 0.5rem">
+              <li>
+                The <code class="code-inline">/session/extend</code> API is
+                called at <strong>strategic intervals</strong>, not on every
+                user action
+              </li>
+              <li>
+                Timer polls every <strong>60 seconds</strong> and checks for
+                activity
+              </li>
+              <li>
+                Extension happens only in specific
+                <strong>time windows</strong> (e.g., 249-240s, 189-180s
+                remaining)
+              </li>
+              <li>
+                <strong>RTS (WebSocket)</strong> ensures all browser tabs stay
+                synchronized
+              </li>
+              <li>
+                <strong>Randomized polling (10-300s)</strong> provides fallback
+                when RTS is disconnected
+              </li>
+              <li>
+                Products can trigger extension via
+                <code class="code-inline">extendIdleSession</code> custom event
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon green">🎯</div>
+            <div class="card-title">
+              The 3 Extension Trigger Scenarios + Fallback
+            </div>
+          </div>
+          <table>
+            <tbody>
+              <tr>
+                <td><strong>1. Automatic</strong></td>
+                <td>
+                  Timer polls every 60s, extends if user was active and in right
+                  time window
+                </td>
+              </tr>
+              <tr>
+                <td><strong>2. Manual</strong></td>
+                <td>User clicks during warning modal (last 80 seconds)</td>
+              </tr>
+              <tr>
+                <td><strong>3. External</strong></td>
+                <td>
+                  Product dispatches
+                  <code class="code-inline">extendIdleSession</code> event
+                </td>
+              </tr>
+              <tr>
+                <td><strong>⚡ Fallback</strong></td>
+                <td>
+                  Randomized polling (10-300s delay) when RTS WebSocket is
+                  disconnected
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon purple">🎲</div>
+            <div class="card-title">Randomized Polling Quick Reference</div>
+          </div>
+          <table>
+            <tbody>
+              <tr>
+                <td><strong>When Triggered</strong></td>
+                <td>RTS WebSocket disconnects</td>
+              </tr>
+              <tr>
+                <td><strong>Initial Wait</strong></td>
+                <td>305 seconds (5s + 300s) before polling starts</td>
+              </tr>
+              <tr>
+                <td><strong>Random Delay Range</strong></td>
+                <td>10 - 300 seconds (uniformly distributed)</td>
+              </tr>
+              <tr>
+                <td><strong>Purpose</strong></td>
+                <td>
+                  Prevent thundering herd on server after mass disconnects
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Stops When</strong></td>
+                <td>RTS WebSocket reconnects</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Initialize Mermaid
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: "dark",
+        securityLevel: "loose",
+        themeVariables: {
+          primaryColor: "#58a6ff",
+          primaryTextColor: "#e6edf3",
+          primaryBorderColor: "#30363d",
+          lineColor: "#8b949e",
+          secondaryColor: "#21262d",
+          tertiaryColor: "#161b22",
+          background: "#0d1117",
+          mainBkg: "#21262d",
+          nodeBorder: "#30363d",
+          clusterBkg: "#161b22",
+          clusterBorder: "#30363d",
+          titleColor: "#e6edf3",
+          edgeLabelBackground: "#21262d",
+          actorBkg: "#21262d",
+          actorBorder: "#58a6ff",
+          actorTextColor: "#e6edf3",
+          actorLineColor: "#8b949e",
+          signalColor: "#e6edf3",
+          signalTextColor: "#e6edf3",
+          labelBoxBkgColor: "#21262d",
+          labelBoxBorderColor: "#30363d",
+          labelTextColor: "#e6edf3",
+          loopTextColor: "#e6edf3",
+          noteBorderColor: "#ffa657",
+          noteBkgColor: "#2d2a1a",
+          noteTextColor: "#e6edf3",
+          activationBorderColor: "#58a6ff",
+          activationBkgColor: "#1a2744",
+          sequenceNumberColor: "#0d1117",
+        },
+        sequence: {
+          actorMargin: 80,
+          boxMargin: 10,
+          boxTextMargin: 5,
+          noteMargin: 10,
+          messageMargin: 35,
+          mirrorActors: false,
+          bottomMarginAdj: 1,
+          useMaxWidth: true,
+          rightAngles: false,
+          showSequenceNumbers: false,
+          wrap: true,
+          wrapPadding: 10,
+        },
+        flowchart: {
+          useMaxWidth: true,
+          htmlLabels: true,
+          curve: "basis",
+          padding: 15,
+        },
+      });
+
+      // Navigation active state
+      const navLinks = document.querySelectorAll("nav a");
+      const sections = document.querySelectorAll("section");
+
+      window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (scrollY >= sectionTop - 150) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${current}`) {
+            link.classList.add("active");
+          }
+        });
+      });
+
+      // Smooth scroll for navigation
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute("href").slice(1);
+          const targetSection = document.getElementById(targetId);
+          if (targetSection) {
+            targetSection.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
