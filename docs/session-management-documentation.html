@@ -8,40 +8,40 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0d1117;
-            --bg-secondary: #161b22;
-            --bg-tertiary: #21262d;
-            --bg-accent: #1a1f2e;
-            --text-primary: #e6edf3;
-            --text-secondary: #8b949e;
-            --text-muted: #6e7681;
-            --accent-primary: #58a6ff;
-            --accent-secondary: #7ee787;
-            --accent-warning: #ffa657;
-            --accent-danger: #f85149;
-            --accent-purple: #bc8cff;
-            --border-color: #30363d;
-            --border-highlight: #238636;
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-4: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            --shadow-glow: 0 0 40px rgba(88, 166, 255, 0.15);
+            --bg-primary: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --bg-tertiary: #eef2f6;
+            --bg-accent: #f0f4f8;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --text-muted: #6b7280;
+            --accent-primary: #2563eb;
+            --accent-secondary: #059669;
+            --accent-warning: #d97706;
+            --accent-danger: #dc2626;
+            --accent-purple: #7c3aed;
+            --border-color: #e5e7eb;
+            --border-highlight: #10b981;
+            --gradient-1: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --gradient-2: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+            --gradient-3: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            --gradient-4: linear-gradient(135deg, #f472b6 0%, #fbbf24 100%);
+            --shadow-glow: 0 4px 20px rgba(37, 99, 235, 0.1);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; }
-        .bg-pattern { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; background: radial-gradient(circle at 20% 20%, rgba(88, 166, 255, 0.03) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(126, 231, 135, 0.03) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(188, 140, 255, 0.02) 0%, transparent 50%); }
-        header { background: linear-gradient(180deg, var(--bg-secondary) 0%, transparent 100%); border-bottom: 1px solid var(--border-color); padding: 2rem 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(20px); }
+        .bg-pattern { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; background: radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.04) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(5, 150, 105, 0.04) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.03) 0%, transparent 50%); }
+        header { background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%); border-bottom: 1px solid var(--border-color); padding: 2rem 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(20px); }
         .header-content { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; gap: 1.5rem; }
-        .logo { width: 50px; height: 50px; background: var(--gradient-1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.5rem; box-shadow: var(--shadow-glow); }
-        .header-title h1 { font-size: 1.75rem; font-weight: 700; background: linear-gradient(90deg, var(--text-primary), var(--accent-primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .logo { width: 50px; height: 50px; background: var(--gradient-1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.5rem; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25); }
+        .header-title h1 { font-size: 1.75rem; font-weight: 700; background: linear-gradient(90deg, #1f2937, #2563eb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .header-title p { color: var(--text-secondary); font-size: 0.9rem; }
         nav { position: fixed; left: 0; top: 100px; width: 280px; height: calc(100vh - 100px); background: var(--bg-secondary); border-right: 1px solid var(--border-color); padding: 2rem 1.5rem; overflow-y: auto; z-index: 50; }
         nav h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 1rem; padding-left: 0.5rem; }
         nav ul { list-style: none; margin-bottom: 2rem; }
         nav a { display: block; padding: 0.75rem 1rem; color: var(--text-secondary); text-decoration: none; border-radius: 8px; transition: all 0.2s ease; font-size: 0.9rem; border-left: 3px solid transparent; }
         nav a:hover { background: var(--bg-tertiary); color: var(--text-primary); }
-        nav a.active { background: rgba(88, 166, 255, 0.1); color: var(--accent-primary); border-left-color: var(--accent-primary); }
+        nav a.active { background: rgba(37, 99, 235, 0.1); color: var(--accent-primary); border-left-color: var(--accent-primary); }
         main { margin-left: 280px; padding: 3rem 4rem; max-width: 1200px; }
         section { margin-bottom: 4rem; animation: fadeInUp 0.5s ease; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -50,56 +50,56 @@
         h3 { font-size: 1.4rem; font-weight: 600; margin: 2rem 0 1rem; color: var(--accent-primary); }
         h4 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.75rem; color: var(--text-primary); }
         p { margin-bottom: 1rem; color: var(--text-secondary); }
-        .card { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.75rem; margin-bottom: 1.5rem; transition: all 0.3s ease; }
-        .card:hover { border-color: var(--accent-primary); box-shadow: var(--shadow-glow); }
+        .card { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.75rem; margin-bottom: 1.5rem; transition: all 0.3s ease; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); }
+        .card:hover { border-color: var(--accent-primary); box-shadow: 0 4px 16px rgba(37, 99, 235, 0.12); }
         .card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
         .card-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-        .card-icon.blue { background: rgba(88, 166, 255, 0.15); }
-        .card-icon.green { background: rgba(126, 231, 135, 0.15); }
-        .card-icon.orange { background: rgba(255, 166, 87, 0.15); }
-        .card-icon.purple { background: rgba(188, 140, 255, 0.15); }
-        .card-icon.red { background: rgba(248, 81, 73, 0.15); }
+        .card-icon.blue { background: rgba(37, 99, 235, 0.1); }
+        .card-icon.green { background: rgba(5, 150, 105, 0.1); }
+        .card-icon.orange { background: rgba(217, 119, 6, 0.1); }
+        .card-icon.purple { background: rgba(124, 58, 237, 0.1); }
+        .card-icon.red { background: rgba(220, 38, 38, 0.1); }
         .card-title { font-size: 1.2rem; font-weight: 600; }
-        .code-block { background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; margin: 1rem 0; }
-        .code-header { background: var(--bg-accent); padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); }
+        .code-block { background: #f8fafc; border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; margin: 1rem 0; }
+        .code-header { background: #e2e8f0; padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); }
         .code-lang { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; color: var(--accent-primary); font-weight: 500; }
         .code-file { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--text-muted); }
-        .code-content { padding: 1rem 1.25rem; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; line-height: 1.8; }
-        .code-content code { color: var(--text-primary); }
-        .code-inline { font-family: 'IBM Plex Mono', monospace; background: var(--bg-tertiary); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.85em; color: var(--accent-secondary); }
-        .keyword { color: var(--accent-purple); }
-        .string { color: var(--accent-secondary); }
-        .function { color: var(--accent-primary); }
-        .comment { color: var(--text-muted); font-style: italic; }
-        .number { color: var(--accent-warning); }
-        .property { color: #79c0ff; }
-        .diagram-container { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 16px; padding: 2rem; margin: 1.5rem 0; overflow-x: auto; }
+        .code-content { padding: 1rem 1.25rem; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; line-height: 1.8; background: #f8fafc; }
+        .code-content code { color: #374151; }
+        .code-inline { font-family: 'IBM Plex Mono', monospace; background: var(--bg-tertiary); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.85em; color: #0369a1; }
+        .keyword { color: #7c3aed; }
+        .string { color: #059669; }
+        .function { color: #2563eb; }
+        .comment { color: #6b7280; font-style: italic; }
+        .number { color: #d97706; }
+        .property { color: #0369a1; }
+        .diagram-container { background: #fafbfc; border: 1px solid var(--border-color); border-radius: 16px; padding: 2rem; margin: 1.5rem 0; overflow-x: auto; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); }
         .diagram-container .mermaid { display: flex; justify-content: center; }
         .diagram-title { font-size: 1rem; font-weight: 600; color: var(--accent-primary); margin-bottom: 1.5rem; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: var(--bg-secondary); border-radius: 12px; overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: var(--bg-secondary); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); }
         th, td { padding: 1rem 1.25rem; text-align: left; border-bottom: 1px solid var(--border-color); }
         th { background: var(--bg-tertiary); font-weight: 600; color: var(--text-primary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
         td { color: var(--text-secondary); font-size: 0.9rem; }
         tr:last-child td { border-bottom: none; }
-        tr:hover td { background: rgba(88, 166, 255, 0.03); }
+        tr:hover td { background: rgba(37, 99, 235, 0.04); }
         .timeline { position: relative; padding-left: 2rem; margin: 2rem 0; }
         .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary)); border-radius: 3px; }
         .timeline-item { position: relative; padding: 1rem 0 1.5rem 1.5rem; }
-        .timeline-item::before { content: ''; position: absolute; left: -2rem; top: 1.25rem; width: 12px; height: 12px; background: var(--accent-primary); border-radius: 50%; transform: translateX(-4.5px); box-shadow: 0 0 10px var(--accent-primary); }
+        .timeline-item::before { content: ''; position: absolute; left: -2rem; top: 1.25rem; width: 12px; height: 12px; background: var(--accent-primary); border-radius: 50%; transform: translateX(-4.5px); box-shadow: 0 0 8px rgba(37, 99, 235, 0.4); }
         .timeline-time { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; color: var(--accent-warning); font-weight: 500; }
         .timeline-title { font-size: 1.1rem; font-weight: 600; margin: 0.5rem 0; }
         .timeline-desc { color: var(--text-secondary); font-size: 0.9rem; }
         .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-        .badge-blue { background: rgba(88, 166, 255, 0.2); color: var(--accent-primary); }
-        .badge-green { background: rgba(126, 231, 135, 0.2); color: var(--accent-secondary); }
-        .badge-orange { background: rgba(255, 166, 87, 0.2); color: var(--accent-warning); }
-        .badge-purple { background: rgba(188, 140, 255, 0.2); color: var(--accent-purple); }
-        .badge-red { background: rgba(248, 81, 73, 0.2); color: var(--accent-danger); }
+        .badge-blue { background: rgba(37, 99, 235, 0.12); color: #1d4ed8; }
+        .badge-green { background: rgba(5, 150, 105, 0.12); color: #047857; }
+        .badge-orange { background: rgba(217, 119, 6, 0.12); color: #b45309; }
+        .badge-purple { background: rgba(124, 58, 237, 0.12); color: #6d28d9; }
+        .badge-red { background: rgba(220, 38, 38, 0.12); color: #b91c1c; }
         .alert { padding: 1.25rem 1.5rem; border-radius: 12px; margin: 1rem 0; display: flex; align-items: flex-start; gap: 1rem; }
         .alert-icon { font-size: 1.25rem; flex-shrink: 0; }
-        .alert-info { background: rgba(88, 166, 255, 0.1); border-left: 4px solid var(--accent-primary); }
-        .alert-success { background: rgba(126, 231, 135, 0.1); border-left: 4px solid var(--accent-secondary); }
-        .alert-warning { background: rgba(255, 166, 87, 0.1); border-left: 4px solid var(--accent-warning); }
+        .alert-info { background: rgba(37, 99, 235, 0.08); border-left: 4px solid var(--accent-primary); }
+        .alert-success { background: rgba(5, 150, 105, 0.08); border-left: 4px solid var(--accent-secondary); }
+        .alert-warning { background: rgba(217, 119, 6, 0.08); border-left: 4px solid var(--accent-warning); }
         ul, ol { margin: 1rem 0 1rem 1.5rem; color: var(--text-secondary); }
         li { margin-bottom: 0.5rem; }
         .flow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
@@ -269,18 +269,18 @@ flowchart TB
     WSS --> |Logout Event| RL
     WSS --> |RESTART Event| RI
 
-    style Browser fill:#1a2744,stroke:#58a6ff
-    style RTS_Layer fill:#2d1a44,stroke:#bc8cff
-    style Polling fill:#2d2a1a,stroke:#ffa657
-    style APIs fill:#1a3330,stroke:#7ee787
-    style WS fill:#3d1a1a,stroke:#f85149
+    style Browser fill:#dbeafe,stroke:#2563eb
+    style RTS_Layer fill:#ede9fe,stroke:#7c3aed
+    style Polling fill:#fef3c7,stroke:#d97706
+    style APIs fill:#d1fae5,stroke:#059669
+    style WS fill:#fee2e2,stroke:#dc2626
                 </div>
             </div>
         </section>
 
         <!-- ==================== SECTION 1: RTS ==================== -->
         <section id="rts-overview">
-            <h2><span class="icon" style="background: rgba(188, 140, 255, 0.3);">📡</span> 1. RTS (Real-Time Switching) Overview</h2>
+            <h2><span class="icon" style="background: rgba(124, 58, 237, 0.15);">📡</span> 1. RTS (Real-Time Switching) Overview</h2>
             
             <div class="card">
                 <div class="card-header">
@@ -317,7 +317,7 @@ flowchart TB
         </section>
 
         <section id="rts-connection">
-            <h2><span class="icon" style="background: rgba(188, 140, 255, 0.3);">🔗</span> RTS Connection Lifecycle</h2>
+            <h2><span class="icon" style="background: rgba(124, 58, 237, 0.15);">🔗</span> RTS Connection Lifecycle</h2>
 
             <div class="diagram-container">
                 <div class="diagram-title">RTS Connection Lifecycle</div>
@@ -397,7 +397,7 @@ sequenceDiagram
         </section>
 
         <section id="rts-channels">
-            <h2><span class="icon" style="background: rgba(188, 140, 255, 0.3);">📨</span> RTS Channels & Messages</h2>
+            <h2><span class="icon" style="background: rgba(124, 58, 237, 0.15);">📨</span> RTS Channels & Messages</h2>
 
             <h3>Channel Types</h3>
             <div class="card">
@@ -448,7 +448,7 @@ sequenceDiagram
         </section>
 
         <section id="rts-scenarios">
-            <h2><span class="icon" style="background: rgba(188, 140, 255, 0.3);">🎯</span> RTS Scenarios</h2>
+            <h2><span class="icon" style="background: rgba(124, 58, 237, 0.15);">🎯</span> RTS Scenarios</h2>
 
             <h3>Scenario 1: Session Extension Sync</h3>
             <div class="diagram-container">
@@ -537,7 +537,7 @@ sequenceDiagram
         </section>
         <!-- ==================== SECTION 2: /SESSION API ==================== -->
         <section id="session-overview">
-            <h2><span class="icon" style="background: rgba(88, 166, 255, 0.3);">🔄</span> 2. /session API Overview</h2>
+            <h2><span class="icon" style="background: rgba(37, 99, 235, 0.15);">🔄</span> 2. /session API Overview</h2>
             
             <div class="card">
                 <div class="card-header"><div class="card-icon blue">📡</div><div><div class="card-title">POST /session</div><span class="badge badge-blue">HTTP POST</span></div></div>
@@ -591,7 +591,7 @@ sequenceDiagram
         </section>
 
         <section id="session-polling">
-            <h2><span class="icon" style="background: rgba(88, 166, 255, 0.3);">⏱️</span> Session Polling</h2>
+            <h2><span class="icon" style="background: rgba(37, 99, 235, 0.15);">⏱️</span> Session Polling</h2>
 
             <div class="alert alert-info">
                 <span class="alert-icon">💡</span>
@@ -669,7 +669,7 @@ sequenceDiagram
         </section>
 
         <section id="session-validation">
-            <h2><span class="icon" style="background: rgba(88, 166, 255, 0.3);">✅</span> Session Validation</h2>
+            <h2><span class="icon" style="background: rgba(37, 99, 235, 0.15);">✅</span> Session Validation</h2>
 
             <h3>Validation Methods</h3>
             <div class="card">
@@ -711,7 +711,7 @@ sequenceDiagram
         </section>
         <!-- ==================== SECTION 3: RANDOMIZED POLLING ==================== -->
         <section id="random-overview">
-            <h2><span class="icon" style="background: rgba(255, 166, 87, 0.3);">🎲</span> 3. Randomized Polling Overview</h2>
+            <h2><span class="icon" style="background: rgba(217, 119, 6, 0.15);">🎲</span> 3. Randomized Polling Overview</h2>
             
             <div class="card">
                 <div class="card-header"><div class="card-icon orange">⚡</div><div class="card-title">Why Randomized Polling?</div></div>
@@ -750,7 +750,7 @@ sequenceDiagram
         </section>
 
         <section id="random-algorithm">
-            <h2><span class="icon" style="background: rgba(255, 166, 87, 0.3);">🎯</span> Random Delay Algorithm</h2>
+            <h2><span class="icon" style="background: rgba(217, 119, 6, 0.15);">🎯</span> Random Delay Algorithm</h2>
 
             <h3>Random Delay Calculation</h3>
             <div class="code-block">
@@ -875,7 +875,7 @@ sequenceDiagram
         </section>
 
         <section id="random-timeline">
-            <h2><span class="icon" style="background: rgba(255, 166, 87, 0.3);">📊</span> Polling Timeline Example</h2>
+            <h2><span class="icon" style="background: rgba(217, 119, 6, 0.15);">📊</span> Polling Timeline Example</h2>
 
             <div class="timeline">
                 <div class="timeline-item">
@@ -923,7 +923,7 @@ sequenceDiagram
         </section>
         <!-- ==================== SECTION 4: /EXTEND API ==================== -->
         <section id="extend-overview">
-            <h2><span class="icon" style="background: rgba(126, 231, 135, 0.3);">⏰</span> 4. /extend API Overview</h2>
+            <h2><span class="icon" style="background: rgba(5, 150, 105, 0.15);">⏰</span> 4. /extend API Overview</h2>
             
             <div class="card">
                 <div class="card-header"><div class="card-icon green">📡</div><div><div class="card-title">POST /session/extend</div><span class="badge badge-green">HTTP POST</span></div></div>
@@ -961,7 +961,7 @@ sequenceDiagram
         </section>
 
         <section id="extend-triggers">
-            <h2><span class="icon" style="background: rgba(126, 231, 135, 0.3);">⚡</span> Extend API Trigger Scenarios</h2>
+            <h2><span class="icon" style="background: rgba(5, 150, 105, 0.15);">⚡</span> Extend API Trigger Scenarios</h2>
 
             <p>The <code class="code-inline">/session/extend</code> API is triggered in <strong>three scenarios</strong>:</p>
 
@@ -1005,7 +1005,7 @@ target.<span class="function">dispatchEvent</span>(event)</code>
         </section>
 
         <section id="extend-timing">
-            <h2><span class="icon" style="background: rgba(126, 231, 135, 0.3);">⏱️</span> Timing & Frequency</h2>
+            <h2><span class="icon" style="background: rgba(5, 150, 105, 0.15);">⏱️</span> Timing & Frequency</h2>
 
             <div class="alert alert-info">
                 <span class="alert-icon">💡</span>
@@ -1076,7 +1076,7 @@ target.<span class="function">dispatchEvent</span>(event)</code>
         </section>
 
         <section id="extend-flow">
-            <h2><span class="icon" style="background: rgba(126, 231, 135, 0.3);">🔄</span> Complete Extend Flow</h2>
+            <h2><span class="icon" style="background: rgba(5, 150, 105, 0.15);">🔄</span> Complete Extend Flow</h2>
 
             <div class="diagram-container">
                 <div class="diagram-title">Complete Session Extension Flow</div>
@@ -1154,7 +1154,7 @@ sequenceDiagram
 
         <!-- ==================== SECTION 5: /INVALIDATE API ==================== -->
         <section id="invalidate-overview">
-            <h2><span class="icon" style="background: rgba(248, 81, 73, 0.3);">🚪</span> 5. /invalidate API Overview</h2>
+            <h2><span class="icon" style="background: rgba(220, 38, 38, 0.15);">🚪</span> 5. /invalidate API Overview</h2>
             
             <div class="card">
                 <div class="card-header"><div class="card-icon red">⛔</div><div><div class="card-title">POST /session/invalidate</div><span class="badge badge-red">HTTP POST</span></div></div>
@@ -1214,7 +1214,7 @@ sequenceDiagram
         </section>
 
         <section id="invalidate-flow">
-            <h2><span class="icon" style="background: rgba(248, 81, 73, 0.3);">🔄</span> Invalidate Flow</h2>
+            <h2><span class="icon" style="background: rgba(220, 38, 38, 0.15);">🔄</span> Invalidate Flow</h2>
 
             <h3>Session Expiry Handler</h3>
             <div class="code-block">
@@ -1546,11 +1546,11 @@ flowchart TB
         Z --> AA[All Tabs Redirect]
     end
 
-    style Init fill:#1a2744,stroke:#58a6ff
-    style RTS fill:#2d1a44,stroke:#bc8cff
-    style Polling fill:#2d2a1a,stroke:#ffa657
-    style IST fill:#1a3330,stroke:#7ee787
-    style Invalidate fill:#3d1a1a,stroke:#f85149
+    style Init fill:#dbeafe,stroke:#2563eb
+    style RTS fill:#ede9fe,stroke:#7c3aed
+    style Polling fill:#fef3c7,stroke:#d97706
+    style IST fill:#d1fae5,stroke:#059669
+    style Invalidate fill:#fee2e2,stroke:#dc2626
                 </div>
             </div>
         </section>
@@ -1559,37 +1559,37 @@ flowchart TB
     <script>
         mermaid.initialize({
             startOnLoad: true,
-            theme: 'dark',
+            theme: 'base',
             themeVariables: {
-                primaryColor: '#58a6ff',
-                primaryTextColor: '#e6edf3',
-                primaryBorderColor: '#30363d',
-                lineColor: '#8b949e',
-                secondaryColor: '#21262d',
-                tertiaryColor: '#161b22',
-                background: '#0d1117',
-                mainBkg: '#21262d',
-                nodeBorder: '#30363d',
-                clusterBkg: '#161b22',
-                clusterBorder: '#30363d',
-                titleColor: '#e6edf3',
-                edgeLabelBackground: '#21262d',
-                actorBkg: '#21262d',
-                actorBorder: '#58a6ff',
-                actorTextColor: '#e6edf3',
-                actorLineColor: '#8b949e',
-                signalColor: '#e6edf3',
-                signalTextColor: '#e6edf3',
-                labelBoxBkgColor: '#21262d',
-                labelBoxBorderColor: '#30363d',
-                labelTextColor: '#e6edf3',
-                loopTextColor: '#e6edf3',
-                noteBorderColor: '#ffa657',
-                noteBkgColor: '#2d2a1a',
-                noteTextColor: '#e6edf3',
-                activationBorderColor: '#58a6ff',
-                activationBkgColor: '#1a2744',
-                sequenceNumberColor: '#0d1117'
+                primaryColor: '#dbeafe',
+                primaryTextColor: '#1f2937',
+                primaryBorderColor: '#e5e7eb',
+                lineColor: '#6b7280',
+                secondaryColor: '#f6f8fa',
+                tertiaryColor: '#eef2f6',
+                background: '#ffffff',
+                mainBkg: '#f6f8fa',
+                nodeBorder: '#e5e7eb',
+                clusterBkg: '#f6f8fa',
+                clusterBorder: '#e5e7eb',
+                titleColor: '#1f2937',
+                edgeLabelBackground: '#ffffff',
+                actorBkg: '#f6f8fa',
+                actorBorder: '#2563eb',
+                actorTextColor: '#1f2937',
+                actorLineColor: '#6b7280',
+                signalColor: '#1f2937',
+                signalTextColor: '#1f2937',
+                labelBoxBkgColor: '#f6f8fa',
+                labelBoxBorderColor: '#e5e7eb',
+                labelTextColor: '#1f2937',
+                loopTextColor: '#1f2937',
+                noteBorderColor: '#d97706',
+                noteBkgColor: '#fef3c7',
+                noteTextColor: '#1f2937',
+                activationBorderColor: '#2563eb',
+                activationBkgColor: '#dbeafe',
+                sequenceNumberColor: '#ffffff'
             },
             sequence: { actorMargin: 80, boxMargin: 10, messageMargin: 35, useMaxWidth: true, wrap: true },
             flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis', padding: 15 }
